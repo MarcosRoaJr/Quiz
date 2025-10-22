@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Quiz – Paciência, Temperamento & Estilos de Aprendizagem</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #111827;
+            --muted: #9ca3af;
+            --text: #e5e7eb;
+            --accent: #22d3ee;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Helvetica Neue', Arial;
+            background: linear-gradient(135deg, #0b1021, #121a34 45%, #0b1021);
+            color: var(--text)
+        }
+
+        .wrap {
+            max-width: 980px;
+            margin: 32px auto;
+            padding: 0 16px
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid #1f2937;
+            border-radius: 16px;
+            padding: 20px 18px;
+            box-shadow: 0 10px 24px #0005;
+            margin-bottom: 16px
+        }
+
+        h1 {
+            font-size: 28px;
+            margin: 0 0 6px
+        }
+
+        p.lead {
+            color: var(--muted);
+            margin: 0 0 20px
+        }
+
+        .q {
+            margin: 14px 0 10px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-top: 1.2rem;
+        }
+
+        .opt {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 8px 0 2px
+        }
+
+        .opt label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #0b1222;
+            border: 1px solid #22304d;
+            padding: 10px 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            user-select: none
+        }
+
+        .opt input {
+            accent-color: var(--accent)
+        }
+
+        .section-title {
+            margin-top: 8px;
+            border-left: 4px solid var(--accent);
+            padding-left: 10px;
+            font-weight: 700
+        }
+
+        button {
+            all: unset;
+            background: linear-gradient(90deg, #06b6d4, #60a5fa);
+            padding: 12px 16px;
+            border-radius: 12px;
+            color: #021018;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 10px
+        }
+
+        button:hover {
+            opacity: .95;
+            transform: translateY(-1px)
+        }
+
+        .result {
+            display: grid;
+            gap: 10px
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: #0a2530;
+            border: 1px solid #1d3b47;
+            color: #9be8ff
+        }
+
+        .grid {
+            display: grid;
+            gap: 12px
+        }
+
+        @media(min-width:860px) {
+            .grid {
+                grid-template-columns: 1fr 1fr
+            }
+        }
+
+        .meter {
+            height: 10px;
+            background: #0b1222;
+            border: 1px solid #22304d;
+            border-radius: 999px;
+            overflow: hidden
+        }
+
+        .fill {
+            height: 100%;
+            background: linear-gradient(90deg, #22d3ee, #60a5fa)
+        }
+
+        small {
+            color: var(--muted)
+        }
+
+        details {
+            background: #0b1222;
+            border: 1px solid #22304d;
+            border-radius: 12px;
+            padding: 10px 12px
+        }
+
+        details>summary {
+            cursor: pointer;
+            font-weight: 700;
+            margin: -10px -12px 8px;
+            padding: 10px 12px
+        }
+
+        .two-col {
+            display: grid;
+            gap: 12px
+        }
+
+        @media(min-width:720px) {
+            .two-col {
+                grid-template-columns: 1fr 1fr
+            }
+        }
+
+        .hr {
+            height: 1px;
+            background: #1f2937;
+            margin: 12px 0
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="card">
+            <h1>Quiz – Paciência, Temperamento & Estilos de Aprendizagem</h1>
+            <p class="lead">Recreativo e educativo. Não é avaliação psicológica. Responda honestamente. 😉</p>
+        </div>
+
+        <!-- Seção A: Paciência (5 itens, cada 1..3 pts => total 5..15) -->
+        <div class="card" id="sec-pac">
+            <div class="section-title">Seção A – Paciência</div>
+            <small>Marque o quanto você concorda com cada frase.</small>
+
+            <div class="q">A1. Fico irritado quando as coisas demoram.</div>
+            <div class="opt" data-key="A1" data-scale="impatience">
+                <label><input type="radio" name="A1" value="3">Concordo</label>
+                <label><input type="radio" name="A1" value="2">Neutro</label>
+                <label><input type="radio" name="A1" value="1">Discordo</label>
+            </div>
+
+            <div class="q">A2. Fico ansioso em filas ou esperas.</div>
+            <div class="opt" data-key="A2" data-scale="impatience">
+                <label><input type="radio" name="A2" value="3">Concordo</label>
+                <label><input type="radio" name="A2" value="2">Neutro</label>
+                <label><input type="radio" name="A2" value="1">Discordo</label>
+            </div>
+
+            <div class="q">A3. Interrompo as pessoas sem querer.</div>
+            <div class="opt" data-key="A3" data-scale="impatience">
+                <label><input type="radio" name="A3" value="3">Concordo</label>
+                <label><input type="radio" name="A3" value="2">Neutro</label>
+                <label><input type="radio" name="A3" value="1">Discordo</label>
+            </div>
+
+            <div class="q">A4. Prefiro “fazer logo” do que planejar.</div>
+            <div class="opt" data-key="A4" data-scale="impatience">
+                <label><input type="radio" name="A4" value="3">Concordo</label>
+                <label><input type="radio" name="A4" value="2">Neutro</label>
+                <label><input type="radio" name="A4" value="1">Discordo</label>
+            </div>
+
+            <div class="q">A5. Perco a calma com facilidade em atrasos.</div>
+            <div class="opt" data-key="A5" data-scale="impatience">
+                <label><input type="radio" name="A5" value="3">Concordo</label>
+                <label><input type="radio" name="A5" value="2">Neutro</label>
+                <label><input type="radio" name="A5" value="1">Discordo</label>
+            </div>
+        </div>
+
+        <!-- Seção B: Temperamento – Eixos Energia e Sociabilidade -->
+        <div class="card" id="sec-temp">
+            <div class="section-title">Seção B – Tendências de Temperamento</div>
+            <small>Escolha a opção que mais parece com você.</small>
+
+            <!-- Energia (Ativo +1 vs Calmo 0) — 4 itens -->
+            <div class="q">B1. Quando surge um problema, eu ajo na hora.</div>
+            <div class="opt" data-key="B1" data-axis="energia">
+                <label><input type="radio" name="B1" value="1">Sim, ajo logo </label>
+                <label><input type="radio" name="B1" value="0">Penso com calma </label>
+            </div>
+
+            <div class="q">B2. Prefiro desafios intensos a rotinas previsíveis.</div>
+            <div class="opt" data-key="B2" data-axis="energia">
+                <label><input type="radio" name="B2" value="1">Concordo </label>
+                <label><input type="radio" name="B2" value="0">Prefiro estabilidade </label>
+            </div>
+
+            <div class="q">B3. Tomo decisões rapidamente.</div>
+            <div class="opt" data-key="B3" data-axis="energia">
+                <label><input type="radio" name="B3" value="1">Sim </label>
+                <label><input type="radio" name="B3" value="0">Prefiro analisar </label>
+            </div>
+
+            <div class="q">B4. Gosto de acelerar o ritmo das coisas.</div>
+            <div class="opt" data-key="B4" data-axis="energia">
+                <label><input type="radio" name="B4" value="1">Sim </label>
+                <label><input type="radio" name="B4" value="0">Não muito </label>
+            </div>
+
+            <!-- Sociabilidade (Extro +1 vs Intro 0) — 4 itens -->
+            <div class="q">B5. Recarrego energia com pessoas e eventos.</div>
+            <div class="opt" data-key="B5" data-axis="sociab">
+                <label><input type="radio" name="B5" value="1">Sim </label>
+                <label><input type="radio" name="B5" value="0">Não, prefiro silêncio </label>
+            </div>
+
+            <div class="q">B6. Falo bastante e faço amizades rápido.</div>
+            <div class="opt" data-key="B6" data-axis="sociab">
+                <label><input type="radio" name="B6" value="1">Sim </label>
+                <label><input type="radio" name="B6" value="0">Sou mais reservado </label>
+            </div>
+
+            <div class="q">B7. Em grupo, costumo liderar ou puxar conversa.</div>
+            <div class="opt" data-key="B7" data-axis="sociab">
+                <label><input type="radio" name="B7" value="1">Sim </label>
+                <label><input type="radio" name="B7" value="0">Fico tranquilo </label>
+            </div>
+
+            <div class="q">B8. Prefiro conhecer gente nova a ficar só.</div>
+            <div class="opt" data-key="B8" data-axis="sociab">
+                <label><input type="radio" name="B8" value="1">Sim </label>
+                <label><input type="radio" name="B8" value="0">Prefiro meu canto </label>
+            </div>
+        </div>
+
+        <!-- Seção C: Estilos de Aprendizagem (VARK) -->
+        <div class="card" id="sec-vark">
+            <div class="section-title">Seção C – Preferências de Estudo (VARK)</div>
+            <small>Para cada situação, escolha a opção que mais combina com você. Isto mede preferências, não
+                limitações.</small>
+
+            <div class="q">C1. Ao aprender um conteúdo novo, eu prefiro…</div>
+            <div class="opt" data-key="C1" data-vark>
+                <label><input type="radio" name="C1" value="V">Diagramas, mapas mentais, esquemas </label>
+                <label><input type="radio" name="C1" value="A">Explicações faladas, podcasts, aulas</label>
+                <label><input type="radio" name="C1" value="R">Ler textos e escrever resumos</label>
+                <label><input type="radio" name="C1" value="K">Fazer na prática, mexer, testar</label>
+            </div>
+
+            <div class="q">C2. Quando estudo sozinho, eu…</div>
+            <div class="opt" data-key="C2" data-vark>
+                <label><input type="radio" name="C2" value="V">Uso cores e setas para organizar o caderno</label>
+                <label><input type="radio" name="C2" value="A">Leio em voz alta ou explico para mim mesmo</label>
+                <label><input type="radio" name="C2" value="R">Faço resumos e listas de tópicos</label>
+                <label><input type="radio" name="C2" value="K">Monto exercícios e projetos curtos</label>
+            </div>
+
+            <div class="q">C3. Em apresentações, eu prefiro…</div>
+            <div class="opt" data-key="C3" data-vark>
+                <label><input type="radio" name="C3" value="V">Slides com gráficos e imagens</label>
+                <label><input type="radio" name="C3" value="A">Explicação clara do apresentador</label>
+                <label><input type="radio" name="C3" value="R">Notas compartilhadas e materiais escritos</label>
+                <label><input type="radio" name="C3" value="K">Demonstrações ao vivo</label>
+            </div>
+
+            <div class="q">C4. Para lembrar fórmulas ou termos, eu…</div>
+            <div class="opt" data-key="C4" data-vark>
+                <label><input type="radio" name="C4" value="V">Crio quadros e setas conectando ideias</label>
+                <label><input type="radio" name="C4" value="A">Uso rimas ou repito em voz alta</label>
+                <label><input type="radio" name="C4" value="R">Escrevo várias vezes e faço fichas</label>
+                <label><input type="radio" name="C4" value="K">Aplico em exercícios práticos</label>
+            </div>
+
+            <div class="q">C5. Em aulas longas, ajuda quando…</div>
+            <div class="opt" data-key="C5" data-vark>
+                <label><input type="radio" name="C5" value="V">Há esquemas no quadro</label>
+                <label><input type="radio" name="C5" value="A">Há diálogo e perguntas</label>
+                <label><input type="radio" name="C5" value="R">Há material de leitura organizado</label>
+                <label><input type="radio" name="C5" value="K">Há atividades e pausas ativas</label>
+            </div>
+
+            <div class="q">C6. Para entender código novo, eu…</div>
+            <div class="opt" data-key="C6" data-vark>
+                <label><input type="radio" name="C6" value="V">Desenho o fluxo (fluxograma)</label>
+                <label><input type="radio" name="C6" value="A">Peço alguém para explicar falando</label>
+                <label><input type="radio" name="C6" value="R">Leio a doc e comento o código</label>
+                <label><input type="radio" name="C6" value="K">Rodo e mexo no código</label>
+            </div>
+
+            <div class="q">C7. Em revisão para prova, eu…</div>
+            <div class="opt" data-key="C7" data-vark>
+                <label><input type="radio" name="C7" value="V">Faço mapas mentais</label>
+                <label><input type="radio" name="C7" value="A">Gravo áudios explicando</label>
+                <label><input type="radio" name="C7" value="R">Releio resumos e questões</label>
+                <label><input type="radio" name="C7" value="K">Resolvo exercícios práticos</label>
+            </div>
+
+            <div class="q">C8. Quando erro, aprendo melhor…</div>
+            <div class="opt" data-key="C8" data-vark>
+                <label><input type="radio" name="C8" value="V">Vendo onde cada parte se conectou errado</label>
+                <label><input type="radio" name="C8" value="A">Conversando sobre o erro</label>
+                <label><input type="radio" name="C8" value="R">Escrevendo o que corrigir</label>
+                <label><input type="radio" name="C8" value="K">Refazendo na prática</label>
+            </div>
+
+            <div class="q">C9. Tutorial perfeito é aquele que…</div>
+            <div class="opt" data-key="C9" data-vark>
+                <label><input type="radio" name="C9" value="V">Mostra diagramas e telas</label>
+                <label><input type="radio" name="C9" value="A">Tem boa narração</label>
+                <label><input type="radio" name="C9" value="R">Tem documentação detalhada</label>
+                <label><input type="radio" name="C9" value="K">Inclui um projeto mão na massa</label>
+            </div>
+
+            <div class="q">C10. Para lembrar uma história, eu…</div>
+            <div class="opt" data-key="C10" data-vark>
+                <label><input type="radio" name="C10" value="V">Vejo as cenas na cabeça</label>
+                <label><input type="radio" name="C10" value="A">Lembro das falas</label>
+                <label><input type="radio" name="C10" value="R">Recordo trechos escritos</label>
+                <label><input type="radio" name="C10" value="K">Lembro do que eu fiz/senti</label>
+            </div>
+
+            <div class="q">C11. Em grupo de estudo, eu gosto de…</div>
+            <div class="opt" data-key="C11" data-vark>
+                <label><input type="radio" name="C11" value="V">Organizar um quadro visual</label>
+                <label><input type="radio" name="C11" value="A">Explicar em voz alta</label>
+                <label><input type="radio" name="C11" value="R">Distribuir resumos</label>
+                <label><input type="radio" name="C11" value="K">Conduzir exercícios</label>
+            </div>
+
+            <div class="q">C12. Quando tenho pouco tempo, eu…</div>
+            <div class="opt" data-key="C12" data-vark>
+                <label><input type="radio" name="C12" value="V">Faço um esquema rápido</label>
+                <label><input type="radio" name="C12" value="A">Peço alguém para explicar</label>
+                <label><input type="radio" name="C12" value="R">Leio um resumo objetivo</label>
+                <label><input type="radio" name="C12" value="K">Vou direto para exercícios</label>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="two-col">
+                <div>
+                    <button id="btn">Calcular Resultado</button>
+                </div>
+                <div style="text-align:right">
+                    <button id="btnReset" title="Limpar respostas">Resetar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" id="saida" style="display:none">
+            <div class="section-title">Resultados</div>
+            <div class="grid">
+                <div>
+                    <h3>Paciência</h3>
+                    <div class="meter">
+                        <div class="fill" id="bar-pac" style="width:0%"></div>
+                    </div>
+                    <p id="pac-label" class="badge"></p>
+                    <small>Escala: 5–15 pontos (1–5 Paciente, 6–10 Impaciente, 11–15 Muito impaciente).</small>
+                </div>
+                <div>
+                    <h3>Temperamento</h3>
+                    <div class="result">
+                        <div><span class="badge" id="temp-type"></span></div>
+                        <div><small>Eixos:</small></div>
+                        <div>Energia: <span id="axis-ene"></span> / 4</div>
+                        <div class="meter">
+                            <div class="fill" id="bar-ene" style="width:0%"></div>
+                        </div>
+                        <div>Sociabilidade: <span id="axis-soc"></span> / 4</div>
+                        <div class="meter">
+                            <div class="fill" id="bar-soc" style="width:0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hr"></div>
+
+            <div class="grid">
+                <div>
+                    <h3>Estilos de Aprendizagem (VARK)</h3>
+                    <div>Visual: <span id="vark-V"></span> / 12</div>
+                    <div class="meter">
+                        <div class="fill" id="bar-V" style="width:0%"></div>
+                    </div>
+                    <div>Auditivo: <span id="vark-A"></span> / 12</div>
+                    <div class="meter">
+                        <div class="fill" id="bar-A" style="width:0%"></div>
+                    </div>
+                    <div>Leitura/Escrita: <span id="vark-R"></span> / 12</div>
+                    <div class="meter">
+                        <div class="fill" id="bar-R" style="width:0%"></div>
+                    </div>
+                    <div>Cinestésico: <span id="vark-K"></span> / 12</div>
+                    <div class="meter">
+                        <div class="fill" id="bar-K" style="width:0%"></div>
+                    </div>
+                    <p class="badge" id="vark-top"></p>
+                </div>
+                <div>
+                    <h3>Guia de estudo personalizado</h3>
+                    <div id="texto"></div>
+                </div>
+            </div>
+
+            <div class="hr"></div>
+
+            <details>
+                <summary>Como interpretar estes resultados</summary>
+                <p><strong>Paciência</strong> aqui é um indicador simples de tolerância a esperas e ritmo. Pontuações
+                    mais altas indicam tendência a buscar velocidade; não é “certo ou errado”.</p>
+                <p><strong>Temperamento</strong> usa dois eixos (Energia e Sociabilidade) para um rótulo clássico:
+                    Fleumático, Sanguíneo, Melancólico ou Colérico. São tendências, não caixas fixas.</p>
+                <p><strong>VARK</strong> descreve <em>preferências</em> de estudo (Visual, Auditivo, Leitura/Escrita,
+                    Cinestésico). Preferências podem ajudar na motivação e na organização, mas <em>aprender
+                        efetivamente</em> depende também de prática deliberada, qualidade do material e de misturar
+                    técnicas (ex.: exercícios + resumos + mapas + explicações).</p>
+            </details>
+            <small>Use isto para autoconhecimento leve; não substitui aconselhamento profissional.</small>
+        </div>
+    </div>
+
+    <script>
+        // --- Utilidades ---
+        function getVal(name) { const n = document.querySelector(`[name="${name}"]:checked`); return n ? n.value : null; }
+        function getNumber(name) { const v = getVal(name); return v === null ? null : Number(v); }
+        function pct(n, den) { return Math.max(0, Math.min(100, (n / den) * 100)); }
+        function allAnswered(prefix, count) { for (let i = 1; i <= count; i++) { if (getVal(prefix + i) === null) return false; } return true; }
+
+        // --- Classificação Paciência ---
+        function classificarPaciencia(score) {
+            if (score <= 5) return { rotulo: "Paciente", dica: "Você tende a esperar, ouvir e manter a calma." };
+            if (score <= 10) return { rotulo: "Impaciente", dica: "Gosta de ritmo, valoriza agilidade e objetividade." };
+            return { rotulo: "Muito impaciente", dica: "Prefere ação imediata; pode ganhar ao planejar micro-pausas." };
+        }
+
+        // --- Temperamento por eixos ---
+        function temperamentoPorEixos(energia, sociab) {
+            let tipo = "", descricao = "";
+            const eneHigh = energia >= 3, socHigh = sociab >= 3;
+            if (!eneHigh && !socHigh) { tipo = "Fleumático"; descricao = "calmo, estável, prático, discreto."; }
+            else if (!eneHigh && socHigh) { tipo = "Sanguíneo"; descricao = "sociável, entusiasmado, comunicativo."; }
+            else if (eneHigh && !socHigh) { tipo = "Melancólico"; descricao = "focado, profundo, analítico, reservado."; }
+            else { tipo = "Colérico"; descricao = "decidido, orientado a metas, enérgico, direto."; }
+            return { tipo, descricao };
+        }
+
+        // --- Estilos de aprendizagem (VARK) ---
+        const LS_TIPS = {
+            V: "Use mapas mentais, setas, cores e quadros. Converta textos em esquemas e diagramas. Assista aulas com slides e, se possível, ative legendas.",
+            A: "Explique o conteúdo em voz alta (para si ou para alguém). Use podcasts/audios, estude em grupo, leia trechos importantes em voz alta e crie rimas para lembrar.",
+            R: "Reescreva com suas palavras, faça listas e fichas, resumos estruturados, questões e respostas escritas. Prefira docs bem formatados e anotações limpas.",
+            K: "Aprenda praticando: exercícios, projetos, simulações, laboratórios. Use analogias físicas, roleplays e intervalos ativos. Transforme teoria em ação rápida."
+        };
+
+        function varkPontuacao() {
+            const keys = Array.from({ length: 12 }, (_, i) => `C${i + 1}`);
+            const cont = { V: 0, A: 0, R: 0, K: 0 };
+            for (const k of keys) { const v = getVal(k); if (v === null) return null; cont[v]++; }
+            return cont; // cada estilo 0..12
+        }
+
+        function varkTop(cont) {
+            const entries = Object.entries(cont);
+            const max = Math.max(...entries.map(([_, v]) => v));
+            const tops = entries.filter(([_, v]) => v === max).map(([k, _]) => k);
+            return { max, tops };
+        }
+
+        // --- Texto de devolutiva ---
+        function buildTexto(pac, temp, energia, sociab, vark) {
+            const blocos = [];
+            // Paciência
+            blocos.push(`<p><strong>Paciência:</strong> ${pac.rotulo}. ${pac.dica}</p>`);
+            // Temperamento
+            blocos.push(`<p><strong>Temperamento:</strong> ${temp.tipo} — ${temp.descricao}</p>`);
+            // Dicas por temperamento
+            const dicas = [];
+            if (pac.rotulo !== "Paciente") dicas.push("Regra 3-2-1: 3 respirações profundas, 2 segundos antes de responder, 1 pergunta para entender.");
+            if (temp.tipo === "Colérico") dicas.push("Delegue etapas e valide prazos para evitar sobrecarga.");
+            if (temp.tipo === "Sanguíneo") dicas.push("Use listas curtas (3 itens) para manter o foco.");
+            if (temp.tipo === "Melancólico") dicas.push("Defina limites de tempo por tarefa para não travar no perfeccionismo.");
+            if (temp.tipo === "Fleumático") dicas.push("Negocie prioridades e evite acumular tarefas dos outros.");
+            if (dicas.length) blocos.push(`<p><strong>Sugestões:</strong> ${dicas.join(" ")}</p>`);
+
+            // VARK
+            const ordem = Object.entries(vark).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${labelStyle(k)} ${v}/12`);
+            blocos.push(`<p><strong>Preferências de estudo (VARK):</strong> ${ordem.join(" · ")}</p>`);
+            const { tops } = varkTop(vark);
+            const dicasV = tops.map(k => `<li><strong>${labelStyle(k)}:</strong> ${LS_TIPS[k]}</li>`).join("");
+            blocos.push(`<p><strong>Como aplicar hoje:</strong></p><ul>${dicasV}</ul>`);
+
+            // Rotina proposta
+            blocos.push(`<p><strong>Rotina sugerida (25–5 Pomodoro):</strong> 2 ciclos para teoria (resumo/explicação), 2 ciclos para prática (exercícios/projeto), 1 ciclo para revisão (mapa mental/flashcards). Adapte com seu(s) estilo(s) topo.</p>`);
+
+            return blocos.join("");
+        }
+
+        function labelStyle(k) { return ({ V: "Visual", A: "Auditivo", R: "Leitura/Escrita", K: "Cinestésico" })[k] || k; }
+
+        // --- Botões ---
+        document.getElementById('btn').addEventListener('click', () => {
+            // A: Paciência (A1..A5)
+            const A = [1, 2, 3, 4, 5].map(i => getNumber('A' + i));
+            if (A.some(v => v === null)) { alert("Responda todas as questões da Seção A."); return; }
+            const scorePac = A.reduce((a, b) => a + b, 0); // 5..15
+
+            // B: Temperamento (B1..B8)
+            const B = [1, 2, 3, 4, 5, 6, 7, 8].map(i => getNumber('B' + i));
+            if (B.some(v => v === null)) { alert("Responda todas as questões da Seção B."); return; }
+            const energia = B.slice(0, 4).reduce((a, b) => a + b, 0); // 0..4
+            const sociab = B.slice(4).reduce((a, b) => a + b, 0);   // 0..4
+
+            // C: VARK (C1..C12)
+            const vark = varkPontuacao();
+            if (!vark) { alert("Responda todas as questões da Seção C."); return; }
+
+            // Classificações
+            const pac = classificarPaciencia(scorePac);
+            const temp = temperamentoPorEixos(energia, sociab);
+
+            // UI
+            const saida = document.getElementById('saida');
+            saida.style.display = 'block';
+
+            // Paciência
+            document.getElementById('bar-pac').style.width = pct(scorePac, 15) + '%';
+            document.getElementById('pac-label').textContent = `${pac.rotulo} · ${scorePac}/15`;
+
+            // Temperamento
+            document.getElementById('axis-ene').textContent = energia;
+            document.getElementById('axis-soc').textContent = sociab;
+            document.getElementById('bar-ene').style.width = pct(energia, 4) + '%';
+            document.getElementById('bar-soc').style.width = pct(sociab, 4) + '%';
+            document.getElementById('temp-type').textContent = temp.tipo;
+
+            // VARK
+            const totalVark = 12;
+            for (const k of ['V', 'A', 'R', 'K']) {
+                document.getElementById('vark-' + k).textContent = vark[k];
+                document.getElementById('bar-' + k).style.width = pct(vark[k], totalVark) + '%';
+            }
+            const topInfo = varkTop(vark);
+            const topLabels = topInfo.tops.map(labelStyle).join(' + ');
+            document.getElementById('vark-top').textContent = `Preferência(s): ${topLabels}`;
+
+            // Texto explicativo
+            document.getElementById('texto').innerHTML = buildTexto(pac, temp, energia, sociab, vark);
+
+            window.scrollTo({ top: saida.offsetTop - 20, behavior: 'smooth' });
+        });
+
+        document.getElementById('btnReset').addEventListener('click', () => {
+            document.querySelectorAll('input[type="radio"]').forEach(el => el.checked = false);
+            document.getElementById('saida').style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        document.getElementById('btnPrint').addEventListener('click', () => window.print());
+    </script>
+</body>
+
+</html>
