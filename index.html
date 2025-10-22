@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Testes • Temperamento / Paciência / Estudo</title>
+    <meta name="description"
+        content="Faça testes de Temperamento, Paciência e Estilos de Aprendizagem (VARK) de forma simples e rápida." />
+
+    <style>
+        /* ===== Reset & Tokens ===== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-1: #070b17;
+            --bg-2: #0f172a;
+            --card: #0a1022cc;
+            /* com transparência pro efeito de vidro */
+            --text: #e5e7eb;
+            --muted: #9ca3af;
+            --accent: #22d3ee;
+            --accent-2: #60a5fa;
+            --ring: #a5f3fc;
+            --shadow: 0 20px 40px rgba(0, 0, 0, .45);
+            --radius: 16px;
+        }
+
+        /* ===== Base ===== */
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            color: var(--text);
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Arial, "Noto Sans", sans-serif;
+            background:
+                radial-gradient(1200px 800px at 10% 10%, #0b1023 0%, transparent 60%),
+                radial-gradient(1200px 800px at 90% 90%, #08102a 0%, transparent 60%),
+                linear-gradient(135deg, var(--bg-1), var(--bg-2));
+            display: grid;
+            place-items: center;
+            padding: 24px;
+        }
+
+        /* ===== Container ===== */
+        .shell {
+            width: min(960px, 100%);
+            display: grid;
+            place-items: center;
+        }
+
+        .card {
+            width: min(680px, 100%);
+            padding: clamp(1.25rem, 2vw + 1rem, 2rem);
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, .06);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(8px);
+            position: relative;
+            isolation: isolate;
+            overflow: clip;
+            text-align: center;
+            animation: rise .9s ease both;
+        }
+
+        /* Glow animado na borda */
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            background: conic-gradient(from 180deg,
+                    transparent 0 20%,
+                    var(--accent) 25%,
+                    transparent 35% 55%,
+                    var(--accent-2) 60%,
+                    transparent 70% 100%);
+            filter: blur(24px);
+            opacity: .18;
+            z-index: -1;
+            animation: spin 7.8s linear infinite;
+        }
+
+        /* ===== Tipografia ===== */
+        h1 {
+            font-size: clamp(1.5rem, 1.2rem + 2vw, 2.25rem);
+            margin: 0 0 .25rem;
+            letter-spacing: .3px;
+        }
+
+        p.lead {
+            color: var(--muted);
+            margin: 0 0 1.25rem;
+            line-height: 1.5;
+        }
+
+        ul.features {
+            margin: 0 auto 1rem;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            gap: .5rem;
+        }
+
+        ul.features li {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            color: #cbd5e1;
+            font-size: .98rem;
+        }
+
+        .dot {
+            width: .5rem;
+            height: .5rem;
+            border-radius: 50%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            box-shadow: 0 0 10px rgba(34, 211, 238, .6);
+        }
+
+        /* ===== Ações ===== */
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .75rem;
+            justify-content: center;
+            margin-top: 1.25rem;
+        }
+
+        .btn {
+            --pad-x: 1.1rem;
+            --pad-y: .85rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            padding: var(--pad-y) var(--pad-x);
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            color: #06121a;
+            border: 1px solid rgba(255, 255, 255, .08);
+            box-shadow: 0 10px 24px rgba(3, 169, 244, .15);
+            transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 16px 32px rgba(3, 169, 244, .22);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+            opacity: .9;
+        }
+
+        .btn.secondary {
+            background: #0b1222;
+            color: var(--text);
+            border: 1px solid #22304d;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, .25);
+        }
+
+        .btn.secondary:hover {
+            box-shadow: 0 16px 32px rgba(0, 0, 0, .35);
+        }
+
+        /* ===== Acessibilidade: foco visível ===== */
+        .btn:focus-visible {
+            outline: 3px solid var(--ring);
+            outline-offset: 2px;
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            margin-top: 18px;
+            text-align: center;
+            color: var(--muted);
+            font-size: .9rem;
+        }
+
+        /* ===== Animações ===== */
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes rise {
+            from {
+                opacity: 0;
+                transform: translateY(8px) scale(.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="shell" role="main">
+        <section class="card" aria-labelledby="titulo">
+            <h1 id="titulo">Bem-vindo</h1>
+            <p class="lead">Faça testes rápidos de <strong>Temperamento</strong>, <strong>Paciência</strong> e
+                <strong>Estilos de Aprendizagem</strong> para um estudo mais inteligente.</p>
+
+            <ul class="features" aria-label="Recursos">
+                <li><span class="dot" aria-hidden="true"></span> Este teste é apenas no recreativo </li>
+                <li><span class="dot" aria-hidden="true"></span> Resultados fornecidos, não substitui avaliação profissional</li>
+                <li><span class="dot" aria-hidden="true"></span> Caso queira os resultados informe o seu Email</li>
+            </ul>
+
+            <div class="actions" role="navigation" aria-label="Ações principais">
+                <a class="btn" href="teste.html" rel="next">Iniciar teste</a>
+            </div>
+        </section>
+
+        <footer id="sobre">
+            <p>Este teste é recreativo e educativo; não substitui avaliação profissional.</p>
+        </footer>
+    </main>
+</body>
+
+</html>
